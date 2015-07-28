@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"
+         version="2.4">
+
+  <display-name>sample</display-name>
+  <description>sample</description>
+
+  <context-param>
+    <param-name>fileupload.fileSizeMax</param-name>
+    <param-value>5242880</param-value><!-- 5MB -->
+  </context-param>
+
+  <!-- uncomment and edit if needed -->
+  
+  <context-param>
+    <param-name>office.port</param-name>
+    <param-value>8100</param-value>
+  </context-param>
+  <context-param>
+    <param-name>office.home</param-name>
+    <param-value>D:\\Application\\openoffice4</param-value>
+  </context-param>
+  <context-param>
+    <param-name>office.profile</param-name>
+    <param-value></param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>listener.WebContextInitListener</listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>ConverterServlet</servlet-name>
+    <servlet-class>servlet.ConverterServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ConverterServlet</servlet-name>
+    <url-pattern>/converted/*</url-pattern>
+  </servlet-mapping>
+
+</web-app>
