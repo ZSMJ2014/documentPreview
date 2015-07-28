@@ -1,7 +1,7 @@
 /**
  * 
  */
-package openoffice;
+package officeToHtml;
 
 import java.io.File;
 import java.io.FileInputStream;
