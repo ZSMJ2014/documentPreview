@@ -70,21 +70,20 @@ public class ConverterServlet extends HttpServlet {
         String baseName = FilenameUtils.getBaseName(uploadedFile.getName());
         File inputFile = File.createTempFile(baseName, "." + inputExtension);
         writeUploadedFile(uploadedFile, inputFile);
-        File outputFile = File.createTempFile(baseName, "." + outputExtension);
+        File outputFile = new File(baseName+"."+outputExtension);
         try {
             DocumentFormat outputFormat = converter.getFormatRegistry().getFormatByExtension(outputExtension);
         	long startTime = System.currentTimeMillis();
         	converter.convert(inputFile, outputFile);
         	long conversionTime = System.currentTimeMillis() - startTime;
         	logger.info(String.format("successful conversion: %s [%db] to %s in %dms", inputExtension, inputFile.length(), outputExtension, conversionTime));
-        	response.setContentType(outputFormat.getMediaType());
-            response.setHeader("Content-Disposition", "attachment; filename="+ baseName + "." + outputExtension);
-            sendFile(outputFile, response);
+        	request.getRequestDispatcher("/view?fileName="+outputFile.getName()).forward(request, response);
+        	return;
         } catch (Exception exception) {
             logger.severe(String.format("failed conversion: %s [%db] to %s; %s; input file: %s", inputExtension, inputFile.length(), outputExtension, exception, inputFile.getName()));
         	throw new ServletException("conversion failed", exception);
         } finally {
-        	outputFile.delete();
+//        	outputFile.delete();
         	inputFile.delete();
         }
 	}

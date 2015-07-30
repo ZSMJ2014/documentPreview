@@ -40,5 +40,23 @@
     <servlet-name>ConverterServlet</servlet-name>
     <url-pattern>/converted/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewServlet</servlet-name>
+    <servlet-class>servlet.ViewServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ViewServlet</servlet-name>
+    <url-pattern>/view</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PdfServlet</servlet-name>
+    <servlet-class>servlet.GetPdf</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>PdfServlet</servlet-name>
+    <url-pattern>/getPdf</url-pattern>
+  </servlet-mapping>
 
 </web-app>
